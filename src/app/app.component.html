@@ -1,0 +1,52 @@
+<div style="text-align:center">
+  <img
+    width="100"
+    alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+  />
+</div>
+
+<div class="container">
+  <div id="canvas-warpper"></div>
+  <div class="list-tools">
+    <h2 class="main-title">Reddit Technology List:</h2>
+  </div>
+  <div class="list-wrapper">
+    <div
+      class="item-card"
+      *ngFor="let item of list; let index = index; trackBy: index"
+    >
+      <div class="poster-wrapper">
+        <img [src]="item.data.thumbnail" class="poster" />
+      </div>
+      <div class="info-wrapper">
+        <h3>{{ item.data.title }}</h3>
+        <div class="info">
+          <div>Name: {{ item.data.name }}</div>
+          <div>
+            Date: {{ convertToDate(item.data.created_utc) | date: "medium" }}
+          </div>
+          <div>Ups: {{ item.data.ups }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-wrapper">
+    <button
+      (click)="goBack()"
+      class="btn btn-xs btn-secondary"
+      [attr.disabled]="page === 1 ? 'disabled' : null"
+    >
+      Back
+    </button>
+    <button class="page-index btn btn-primary">{{ page }}</button>
+    <button
+      (click)="nextPage()"
+      class="btn btn-xs btn-secondary"
+      [attr.disabled]="disbledNext ? 'disabled' : null"
+    >
+      Next
+    </button>
+  </div>
+</div>
+<router-outlet></router-outlet>
